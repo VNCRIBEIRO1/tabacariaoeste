@@ -61,20 +61,20 @@ export function HeroBanner({ banners }: { banners: Banner[] }) {
             <span className="text-amber-400">OESTE</span> TABACARIA
           </h1>
           <p className="text-lg md:text-xl text-tobacco-200 mb-8 max-w-lg mx-auto">
-            Os melhores charutos e acessórios premium de Presidente Prudente
+            Sedas, bongs, pipes, narguile e essências em Presidente Prudente
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
-              href="/categoria/charutos"
+              href="/categoria/sedas"
               className="inline-flex items-center gap-2 bg-tobacco-600 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-tobacco-500 transition-all shadow-lg hover:shadow-xl"
             >
-              Ver Charutos
+              Ver Produtos
             </Link>
             <Link
-              href="/categoria/acessorios"
+              href="/categoria/bongs"
               className="inline-flex items-center gap-2 bg-transparent border-2 border-tobacco-500 text-tobacco-100 px-8 py-3 rounded-full font-semibold hover:bg-tobacco-800 transition-all"
             >
-              Acessórios
+              Bongs & Pipes
             </Link>
           </div>
         </div>

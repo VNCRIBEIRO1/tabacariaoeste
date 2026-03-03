@@ -19,14 +19,11 @@ import {
 import { useCartStore } from "@/stores/cart-store"
 
 const categories = [
-  { name: "Charutos", slug: "charutos", icon: "🪵" },
-  { name: "Cigarrilhas", slug: "cigarrilhas", icon: "🚬" },
-  { name: "Tabaco p/ Cachimbo", slug: "tabaco-cachimbo", icon: "🫧" },
-  { name: "Acessórios", slug: "acessorios", icon: "✂️" },
-  { name: "Isqueiros", slug: "isqueiros", icon: "🔥" },
-  { name: "Head Shop", slug: "head-shop", icon: "🌿" },
-  { name: "Bebidas", slug: "bebidas", icon: "🥃" },
-  { name: "Presentes", slug: "presentes", icon: "🎁" },
+  { name: "Sedas", slug: "sedas", icon: "📜" },
+  { name: "Bongs", slug: "bongs", icon: "🫧" },
+  { name: "Pipes", slug: "pipes", icon: "🔥" },
+  { name: "Narguile", slug: "narguile", icon: "💨" },
+  { name: "Essências", slug: "essencias", icon: "🍇" },
 ]
 
 const promos = [
@@ -141,7 +138,7 @@ export function Header() {
                       <span className="text-tobacco-900">TABACARIA</span>
                     </h1>
                     <p className="text-[10px] text-tobacco-400 font-medium tracking-widest hidden sm:block">
-                      CHARUTOS &amp; ACESSÓRIOS PREMIUM
+                      SEDAS, BONGS &amp; ACESSÓRIOS
                     </p>
                   </div>
                 </div>
@@ -152,7 +149,7 @@ export function Header() {
                 <div className="relative w-full">
                   <input
                     type="text"
-                    placeholder="Buscar charutos, acessórios, bebidas..."
+                    placeholder="Buscar sedas, bongs, pipes, narguile..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full rounded-full border border-tobacco-200 bg-tobacco-50/50 px-5 py-2.5 pr-12 text-sm text-tobacco-800 placeholder:text-tobacco-400 focus:outline-none focus:ring-2 focus:ring-tobacco-500/30 focus:border-tobacco-400 transition-all"

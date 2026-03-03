@@ -52,7 +52,7 @@ export default function SobrePage() {
         <p className="text-lg text-tobacco-600 leading-relaxed">
           Somos uma tabacaria especializada, localizada no coração de Presidente
           Prudente - SP. Há anos oferecemos os melhores produtos do segmento,
-          desde tabacos premium, narguiles, sedas, essências, acessórios e muito
+          desde sedas, bongs, pipes, narguile, essências e muito
           mais.
         </p>
       </div>
@@ -67,7 +67,7 @@ export default function SobrePage() {
             <p>
               A Oeste Tabacaria nasceu da paixão por produtos de qualidade e do
               desejo de oferecer uma experiência diferenciada aos amantes do
-              tabaco e narguile na região Oeste Paulista.
+              segmento na região Oeste Paulista.
             </p>
             <p>
               Desde o início, nosso compromisso é trazer os melhores produtos

@@ -13,14 +13,11 @@ import {
 } from "lucide-react"
 
 const categories = [
-  { name: "Charutos", slug: "charutos" },
-  { name: "Cigarrilhas", slug: "cigarrilhas" },
-  { name: "Tabaco p/ Cachimbo", slug: "tabaco-cachimbo" },
-  { name: "Acessórios", slug: "acessorios" },
-  { name: "Isqueiros", slug: "isqueiros" },
-  { name: "Head Shop", slug: "head-shop" },
-  { name: "Bebidas", slug: "bebidas" },
-  { name: "Presentes", slug: "presentes" },
+  { name: "Sedas", slug: "sedas" },
+  { name: "Bongs", slug: "bongs" },
+  { name: "Pipes", slug: "pipes" },
+  { name: "Narguile", slug: "narguile" },
+  { name: "Essências", slug: "essencias" },
 ]
 
 export function Footer() {
@@ -84,8 +81,8 @@ export function Footer() {
               </h3>
             </div>
             <p className="text-sm leading-relaxed mb-5 text-tobacco-400">
-              A melhor tabacaria de Presidente Prudente. Charutos cubanos premium,
-              acessórios importados, head shop e muito mais. Qualidade e tradição desde 2020.
+              A melhor tabacaria de Presidente Prudente. Sedas, bongs, pipes,
+              narguile, essências e acessórios. Qualidade e tradição desde 2020.
             </p>
             <div className="flex items-center gap-3">
               <a

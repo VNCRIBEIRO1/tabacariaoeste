@@ -192,7 +192,7 @@ export default async function HomePage() {
                 para 10% de desconto na primeira compra.
               </p>
               <Link
-                href="/categoria/charutos"
+                href="/categoria/sedas"
                 className="inline-flex items-center gap-2 bg-tobacco-500 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-tobacco-400 transition-all shadow-lg hover:shadow-xl"
               >
                 Aproveitar Oferta
