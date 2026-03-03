@@ -14,7 +14,9 @@ export async function POST(req: NextRequest) {
       }
 
       const payment = await getPayment(paymentId)
-      const orderId = payment.external_reference
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const paymentData = payment as any
+      const orderId = paymentData.external_reference
 
       if (!orderId) {
         console.error("No external_reference in payment", paymentId)
@@ -30,7 +32,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ received: true })
       }
 
-      const newStatus = mapPaymentStatus(payment.status)
+      const newStatus = mapPaymentStatus(paymentData.status)
 
       if (order.status !== newStatus) {
         await prisma.$transaction([
@@ -38,14 +40,14 @@ export async function POST(req: NextRequest) {
             where: { id: orderId },
             data: {
               status: newStatus as any,
-              paymentId: payment.id.toString(),
+              paymentId: paymentData.id.toString(),
             },
           }),
           prisma.orderStatusHistory.create({
             data: {
               orderId,
               status: newStatus as any,
-              comment: `Pagamento ${payment.status} via MercadoPago (${payment.payment_method_id})`,
+              note: `Pagamento ${paymentData.status} via MercadoPago (${paymentData.payment_method_id})`,
             },
           }),
         ])
