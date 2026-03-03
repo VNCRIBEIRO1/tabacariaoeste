@@ -1,7 +1,14 @@
+import { config } from "dotenv"
+config({ path: ".env.local", override: true })
+
 import { PrismaClient } from "@prisma/client"
+import { PrismaNeon } from "@prisma/adapter-neon"
+import { neon } from "@neondatabase/serverless"
 import bcrypt from "bcryptjs"
 
-const prisma = new PrismaClient()
+const client = neon(process.env.DATABASE_URL!)
+const adapter = new PrismaNeon(client)
+const prisma = new PrismaClient({ adapter })
 
 async function main() {
   console.log("Seeding database...")
@@ -395,8 +402,7 @@ async function main() {
     update: {},
     create: {
       id: "banner-hero-1",
-      title: "Promocao de Narguiles",
-      subtitle: "Ate 20% OFF em narguiles selecionados. Aproveite!",
+      title: "Promocao de Narguiles - Ate 20% OFF",
       desktopImage: "/images/banners/hero-narguile-desktop.jpg",
       mobileImage: "/images/banners/hero-narguile-mobile.jpg",
       link: "/categoria/narguile-e-essencias",
@@ -411,8 +417,7 @@ async function main() {
     update: {},
     create: {
       id: "banner-hero-2",
-      title: "Novos Acessorios",
-      subtitle: "Confira os lancamentos em isqueiros, piteiras e mais.",
+      title: "Novos Acessorios - Lancamentos em Isqueiros e Piteiras",
       desktopImage: "/images/banners/hero-acessorios-desktop.jpg",
       mobileImage: "/images/banners/hero-acessorios-mobile.jpg",
       link: "/categoria/acessorios",
@@ -448,17 +453,13 @@ async function main() {
     create: {
       id: "default",
       storeName: "Oeste Tabacaria",
-      storeEmail: "contato@oestetabacaria.com.br",
-      storePhone: "(18) 98817-6442",
+      email: "contato@oestetabacaria.com.br",
+      phone: "(18) 98817-6442",
       whatsapp: "5518988176442",
-      address: "Av. Manoel Goulart, 32 - Centro",
-      city: "Presidente Prudente",
-      state: "SP",
-      zipCode: "19010-270",
-      aboutText: "A Oeste Tabacaria e referencia em produtos de tabacaria em Presidente Prudente. Oferecemos uma ampla variedade de cigarros, fumos, acessorios, narguiles e essencias das melhores marcas do mercado.",
+      address: "Av. Manoel Goulart, 32 - Centro, Presidente Prudente - SP, 19010-270",
       metaTitle: "Oeste Tabacaria | Cigarros, Narguiles e Acessorios em Presidente Prudente",
       metaDescription: "Loja online da Oeste Tabacaria. Cigarros, fumos, narguiles, essencias e acessorios com os melhores precos. Entrega em Presidente Prudente e regiao.",
-      freeShippingThreshold: 150,
+      freeShippingMin: 150,
     },
   })
   console.log("Store settings created")
