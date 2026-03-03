@@ -6,7 +6,6 @@ import {
   MapPin,
   Clock,
 } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
 
 export const metadata = {
   title: "Sobre Nós | Oeste Tabacaria",
@@ -46,11 +45,11 @@ export default function SobrePage() {
     <div className="container mx-auto px-4 py-12">
       {/* Hero */}
       <div className="text-center max-w-3xl mx-auto mb-16">
-        <h1 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-tobacco-900 mb-4">
           Sobre a{" "}
-          <span className="text-amber-700">Oeste Tabacaria</span>
+          <span className="text-tobacco-600">Oeste Tabacaria</span>
         </h1>
-        <p className="text-lg text-stone-600 leading-relaxed">
+        <p className="text-lg text-tobacco-600 leading-relaxed">
           Somos uma tabacaria especializada, localizada no coração de Presidente
           Prudente - SP. Há anos oferecemos os melhores produtos do segmento,
           desde tabacos premium, narguiles, sedas, essências, acessórios e muito
@@ -61,10 +60,10 @@ export default function SobrePage() {
       {/* Story */}
       <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
         <div>
-          <h2 className="text-2xl font-bold text-stone-900 mb-4">
+          <h2 className="text-2xl font-bold text-tobacco-900 mb-4">
             Nossa História
           </h2>
-          <div className="space-y-4 text-stone-600 leading-relaxed">
+          <div className="space-y-4 text-tobacco-600 leading-relaxed">
             <p>
               A Oeste Tabacaria nasceu da paixão por produtos de qualidade e do
               desejo de oferecer uma experiência diferenciada aos amantes do
@@ -83,52 +82,50 @@ export default function SobrePage() {
             </p>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-amber-50 to-stone-100 rounded-2xl p-8 flex items-center justify-center min-h-[300px]">
+        <div className="bg-gradient-to-br from-tobacco-50 to-tobacco-100 rounded-2xl p-8 flex items-center justify-center min-h-[300px]">
           <div className="text-center">
-            <h3 className="text-4xl font-bold text-amber-700 mb-2">
+            <h3 className="text-4xl font-bold text-tobacco-700 mb-2">
               Oeste Tabacaria
             </h3>
-            <p className="text-stone-500">Sua tabacaria de confiança</p>
+            <p className="text-tobacco-500">Sua tabacaria de confiança</p>
           </div>
         </div>
       </div>
 
       {/* Values */}
       <div className="mb-16">
-        <h2 className="text-2xl font-bold text-stone-900 text-center mb-8">
+        <h2 className="text-2xl font-bold text-tobacco-900 text-center mb-8">
           Nossos Valores
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {values.map((value) => {
             const Icon = value.icon
             return (
-              <Card key={value.title} className="text-center hover:shadow-md transition-shadow">
-                <CardContent className="pt-6">
-                  <div className="h-14 w-14 rounded-full bg-amber-50 flex items-center justify-center mx-auto mb-4">
-                    <Icon className="h-7 w-7 text-amber-700" />
+              <div key={value.title} className="text-center bg-white rounded-xl border border-tobacco-200 p-6 hover:shadow-md transition-shadow">
+                  <div className="h-14 w-14 rounded-full bg-tobacco-50 flex items-center justify-center mx-auto mb-4">
+                    <Icon className="h-7 w-7 text-tobacco-700" />
                   </div>
-                  <h3 className="font-semibold text-stone-900 mb-2">
+                  <h3 className="font-semibold text-tobacco-900 mb-2">
                     {value.title}
                   </h3>
-                  <p className="text-sm text-stone-500">{value.description}</p>
-                </CardContent>
-              </Card>
+                  <p className="text-sm text-tobacco-500">{value.description}</p>
+              </div>
             )
           })}
         </div>
       </div>
 
       {/* Store Info */}
-      <div className="bg-stone-900 text-white rounded-2xl p-8 md:p-12">
+      <div className="bg-tobacco-900 text-white rounded-2xl p-8 md:p-12">
         <h2 className="text-2xl font-bold mb-8 text-center">
           Visite Nossa Loja
         </h2>
         <div className="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
           <div className="flex items-start gap-4">
-            <MapPin className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
+            <MapPin className="h-6 w-6 text-tobacco-400 shrink-0 mt-0.5" />
             <div>
               <h3 className="font-semibold mb-1">Endereço</h3>
-              <p className="text-sm text-stone-300">
+              <p className="text-sm text-tobacco-300">
                 Av. Manoel Goulart, 32 - Centro
                 <br />
                 Pres. Prudente - SP, 19010-270
@@ -136,10 +133,10 @@ export default function SobrePage() {
             </div>
           </div>
           <div className="flex items-start gap-4">
-            <Clock className="h-6 w-6 text-amber-500 shrink-0 mt-0.5" />
+            <Clock className="h-6 w-6 text-tobacco-400 shrink-0 mt-0.5" />
             <div>
               <h3 className="font-semibold mb-1">Horário</h3>
-              <p className="text-sm text-stone-300">
+              <p className="text-sm text-tobacco-300">
                 Seg a Sex: 9h às 19h
                 <br />
                 Sáb: 9h às 14h

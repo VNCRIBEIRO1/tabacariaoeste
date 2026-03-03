@@ -1,9 +1,9 @@
 import { prisma } from "@/lib/prisma"
 import { notFound } from "next/navigation"
 import { ProductCard } from "@/components/store/product-card"
-import { Button } from "@/components/ui/button"
+import { CategorySort } from "@/components/store/category-sort"
 import Link from "next/link"
-import { ChevronRight } from "lucide-react"
+import { ChevronRight, Package } from "lucide-react"
 import type { Metadata } from "next"
 
 interface Props {
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   })
   if (!category) return { title: "Categoria não encontrada" }
   return {
-    title: category.name,
+    title: `${category.name} | Oeste Tabacaria`,
     description: category.description || `Produtos da categoria ${category.name}`,
   }
 }
@@ -76,28 +76,28 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-        <Link href="/" className="hover:text-amber-700">Início</Link>
+      <nav className="flex items-center gap-2 text-sm text-tobacco-500 mb-6">
+        <Link href="/" className="hover:text-tobacco-700 transition-colors">Início</Link>
         <ChevronRight className="h-4 w-4" />
-        <span className="text-stone-900 font-medium">{category.name}</span>
+        <span className="text-tobacco-900 font-medium">{category.name}</span>
       </nav>
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Sidebar Filters */}
         <aside className="lg:w-64 flex-shrink-0">
-          <div className="bg-white rounded-lg border p-4 sticky top-24">
-            <h3 className="font-semibold text-stone-900 mb-4">Filtros</h3>
+          <div className="bg-white rounded-xl border border-tobacco-200 p-5 sticky top-24 shadow-sm">
+            <h3 className="font-semibold text-tobacco-900 mb-4">Filtros</h3>
 
             {/* Subcategories */}
             {category.children.length > 0 && (
               <div className="mb-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Subcategorias</h4>
-                <ul className="space-y-1">
+                <h4 className="text-sm font-medium text-tobacco-700 mb-2">Subcategorias</h4>
+                <ul className="space-y-1.5">
                   {category.children.map((sub) => (
                     <li key={sub.id}>
                       <Link
                         href={`/categoria/${sub.slug}`}
-                        className="text-sm text-gray-600 hover:text-amber-700"
+                        className="text-sm text-tobacco-600 hover:text-tobacco-800 transition-colors"
                       >
                         {sub.name}
                       </Link>
@@ -107,24 +107,13 @@ export default async function CategoryPage({ params, searchParams }: Props) {
               </div>
             )}
 
-            {/* Sort */}
+            {/* Sort - Client Component */}
             <div className="mb-6">
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Ordenar</h4>
-              <select
-                className="w-full text-sm border rounded-md p-2"
-                defaultValue={searchParams.sort || "newest"}
-                onChange={(e) => {
-                  const url = new URL(window.location.href)
-                  url.searchParams.set("sort", e.target.value)
-                  url.searchParams.delete("page")
-                  window.location.href = url.toString()
-                }}
-              >
-                <option value="newest">Mais Recentes</option>
-                <option value="price-asc">Menor Preço</option>
-                <option value="price-desc">Maior Preço</option>
-                <option value="bestsellers">Mais Vendidos</option>
-              </select>
+              <h4 className="text-sm font-medium text-tobacco-700 mb-2">Ordenar</h4>
+              <CategorySort
+                defaultSort={searchParams.sort || "newest"}
+                slug={params.slug}
+              />
             </div>
           </div>
         </aside>
@@ -132,19 +121,26 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         {/* Products Grid */}
         <div className="flex-1">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold text-stone-900">{category.name}</h1>
-            <span className="text-sm text-gray-500">{total} produto(s)</span>
+            <div>
+              <h1 className="text-2xl font-bold text-tobacco-900">{category.name}</h1>
+              {category.description && (
+                <p className="text-tobacco-600 mt-1 text-sm">{category.description}</p>
+              )}
+            </div>
+            <span className="text-sm text-tobacco-500 bg-tobacco-100 px-3 py-1 rounded-full">
+              {total} produto{total !== 1 && "s"}
+            </span>
           </div>
 
-          {category.description && (
-            <p className="text-gray-600 mb-6">{category.description}</p>
-          )}
-
           {products.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-gray-500 mb-4">Nenhum produto encontrado nesta categoria.</p>
-              <Link href="/">
-                <Button variant="outline">Voltar ao Início</Button>
+            <div className="text-center py-20 bg-tobacco-50 rounded-2xl">
+              <Package className="h-16 w-16 text-tobacco-300 mx-auto mb-4" />
+              <p className="text-tobacco-600 mb-4 font-medium">Nenhum produto encontrado nesta categoria.</p>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 bg-tobacco-700 text-white px-6 py-2.5 rounded-full font-medium hover:bg-tobacco-800 transition-colors"
+              >
+                Voltar ao Início
               </Link>
             </div>
           ) : (
@@ -164,15 +160,15 @@ export default async function CategoryPage({ params, searchParams }: Props) {
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-2 mt-8">
+                <div className="flex items-center justify-center gap-2 mt-10">
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                     <Link
                       key={p}
                       href={`/categoria/${params.slug}?page=${p}${searchParams.sort ? `&sort=${searchParams.sort}` : ""}`}
-                      className={`px-3 py-1 rounded text-sm ${
+                      className={`inline-flex items-center justify-center h-10 w-10 rounded-lg text-sm font-medium transition-colors ${
                         p === page
-                          ? "bg-amber-700 text-white"
-                          : "bg-white border hover:bg-amber-50"
+                          ? "bg-tobacco-700 text-white shadow-md"
+                          : "bg-white border border-tobacco-200 text-tobacco-700 hover:bg-tobacco-50"
                       }`}
                     >
                       {p}

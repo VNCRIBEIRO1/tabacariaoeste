@@ -52,12 +52,12 @@ export default async function BuscaPage({ searchParams }: BuscaPageProps) {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
-          <Search className="h-6 w-6 text-amber-700" />
-          <h1 className="text-2xl font-bold text-stone-900">
+          <Search className="h-6 w-6 text-tobacco-700" />
+          <h1 className="text-2xl font-bold text-tobacco-900">
             {query ? `Resultados para "${query}"` : "Buscar Produtos"}
           </h1>
         </div>
-        <p className="text-stone-500">
+        <p className="text-tobacco-500">
           {total} {total === 1 ? "produto encontrado" : "produtos encontrados"}
         </p>
       </div>
@@ -87,8 +87,8 @@ export default async function BuscaPage({ searchParams }: BuscaPageProps) {
                   href={`/busca?q=${encodeURIComponent(query)}&page=${p}`}
                   className={`inline-flex items-center justify-center h-10 w-10 rounded-md text-sm font-medium transition-colors ${
                     p === page
-                      ? "bg-amber-700 text-white"
-                      : "bg-white border border-gray-200 text-stone-700 hover:bg-stone-50"
+                      ? "bg-tobacco-700 text-white"
+                      : "bg-white border border-tobacco-200 text-tobacco-700 hover:bg-tobacco-50"
                   }`}
                 >
                   {p}
@@ -99,11 +99,11 @@ export default async function BuscaPage({ searchParams }: BuscaPageProps) {
         </>
       ) : (
         <div className="text-center py-20">
-          <SlidersHorizontal className="h-16 w-16 text-stone-300 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-stone-700 mb-2">
+          <SlidersHorizontal className="h-16 w-16 text-tobacco-300 mx-auto mb-4" />
+          <h2 className="text-xl font-semibold text-tobacco-700 mb-2">
             Nenhum produto encontrado
           </h2>
-          <p className="text-stone-500 max-w-md mx-auto">
+          <p className="text-tobacco-500 max-w-md mx-auto">
             {query
               ? `Não encontramos resultados para "${query}". Tente buscar com outros termos.`
               : "Digite algo no campo de busca para encontrar produtos."}

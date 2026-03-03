@@ -7,63 +7,68 @@ import { HeroBanner } from "@/components/store/hero-banner"
 import { NewsletterForm } from "@/components/store/newsletter-form"
 
 async function getHomeData() {
-  const [banners, categories, featuredProducts, promoProducts, recentProducts] =
-    await Promise.all([
-      prisma.banner.findMany({
-        where: {
-          active: true,
-          position: "HERO",
-          OR: [
-            { startDate: null, endDate: null },
-            { startDate: { lte: new Date() }, endDate: { gte: new Date() } },
-            { startDate: { lte: new Date() }, endDate: null },
-            { startDate: null, endDate: { gte: new Date() } },
-          ],
-        },
-        orderBy: { order: "asc" },
-        take: 5,
-      }),
-      prisma.category.findMany({
-        where: { active: true, parentId: null },
-        orderBy: { order: "asc" },
-        take: 8,
-      }),
-      prisma.product.findMany({
-        where: { active: true, featured: true },
-        include: {
-          images: { where: { isPrimary: true }, take: 1 },
-          category: { select: { name: true } },
-        },
-        orderBy: { salesCount: "desc" },
-        take: 8,
-      }),
-      prisma.product.findMany({
-        where: {
-          active: true,
-          promoPrice: { not: null },
-          OR: [
-            { promoStart: null, promoEnd: null },
-            { promoStart: { lte: new Date() }, promoEnd: { gte: new Date() } },
-          ],
-        },
-        include: {
-          images: { where: { isPrimary: true }, take: 1 },
-          category: { select: { name: true } },
-        },
-        take: 8,
-      }),
-      prisma.product.findMany({
-        where: { active: true },
-        include: {
-          images: { where: { isPrimary: true }, take: 1 },
-          category: { select: { name: true } },
-        },
-        orderBy: { createdAt: "desc" },
-        take: 8,
-      }),
-    ])
+  try {
+    const [banners, categories, featuredProducts, promoProducts, recentProducts] =
+      await Promise.all([
+        prisma.banner.findMany({
+          where: {
+            active: true,
+            position: "HERO",
+            OR: [
+              { startDate: null, endDate: null },
+              { startDate: { lte: new Date() }, endDate: { gte: new Date() } },
+              { startDate: { lte: new Date() }, endDate: null },
+              { startDate: null, endDate: { gte: new Date() } },
+            ],
+          },
+          orderBy: { order: "asc" },
+          take: 5,
+        }),
+        prisma.category.findMany({
+          where: { active: true, parentId: null },
+          orderBy: { order: "asc" },
+          take: 8,
+        }),
+        prisma.product.findMany({
+          where: { active: true, featured: true },
+          include: {
+            images: { where: { isPrimary: true }, take: 1 },
+            category: { select: { name: true } },
+          },
+          orderBy: { salesCount: "desc" },
+          take: 8,
+        }),
+        prisma.product.findMany({
+          where: {
+            active: true,
+            promoPrice: { not: null },
+            OR: [
+              { promoStart: null, promoEnd: null },
+              { promoStart: { lte: new Date() }, promoEnd: { gte: new Date() } },
+            ],
+          },
+          include: {
+            images: { where: { isPrimary: true }, take: 1 },
+            category: { select: { name: true } },
+          },
+          take: 8,
+        }),
+        prisma.product.findMany({
+          where: { active: true },
+          include: {
+            images: { where: { isPrimary: true }, take: 1 },
+            category: { select: { name: true } },
+          },
+          orderBy: { createdAt: "desc" },
+          take: 8,
+        }),
+      ])
 
-  return { banners, categories, featuredProducts, promoProducts, recentProducts }
+    return { banners, categories, featuredProducts, promoProducts, recentProducts }
+  } catch (error) {
+    console.error("Error fetching home data:", error)
+    return { banners: [], categories: [], featuredProducts: [], promoProducts: [], recentProducts: [] }
+  }
 }
 
 export default async function HomePage() {

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronRight, Star, AlertTriangle } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+// Badge replaced with inline styling
 import { formatPrice, calculateDiscount, isPromoActive } from "@/lib/utils"
 import { ProductCard } from "@/components/store/product-card"
 import { AddToCartButton } from "@/components/store/add-to-cart-button"
@@ -77,18 +77,18 @@ export default async function ProductPage({ params }: Props) {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
-        <Link href="/" className="hover:text-amber-700">Início</Link>
+      <nav className="flex items-center gap-2 text-sm text-tobacco-500 mb-6 flex-wrap">
+        <Link href="/" className="hover:text-tobacco-700 transition-colors">Início</Link>
         <ChevronRight className="h-4 w-4" />
         {product.category && (
           <>
-            <Link href={`/categoria/${product.category.slug}`} className="hover:text-amber-700">
+            <Link href={`/categoria/${product.category.slug}`} className="hover:text-tobacco-700 transition-colors">
               {product.category.name}
             </Link>
             <ChevronRight className="h-4 w-4" />
           </>
         )}
-        <span className="text-stone-900 font-medium">{product.name}</span>
+        <span className="text-tobacco-900 font-medium">{product.name}</span>
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
@@ -98,9 +98,9 @@ export default async function ProductPage({ params }: Props) {
         {/* Product Info */}
         <div>
           {product.brand && (
-            <p className="text-sm text-gray-500 mb-1">{product.brand}</p>
+            <p className="text-sm text-tobacco-500 mb-1">{product.brand}</p>
           )}
-          <h1 className="text-2xl md:text-3xl font-bold text-stone-900 mb-2">
+          <h1 className="text-2xl md:text-3xl font-bold text-tobacco-900 mb-2">
             {product.name}
           </h1>
 
@@ -115,46 +115,46 @@ export default async function ProductPage({ params }: Props) {
                   />
                 ))}
               </div>
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-tobacco-500">
                 ({product.reviews.length} avaliação{product.reviews.length !== 1 && "ões"})
               </span>
             </div>
           )}
 
-          <p className="text-sm text-gray-500 mb-4">SKU: {product.sku}</p>
+          <p className="text-sm text-tobacco-500 mb-4">SKU: {product.sku}</p>
 
           {/* Price */}
           <div className="mb-6">
             {hasPromo && (
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-gray-400 line-through text-lg">
+                <span className="text-tobacco-400 line-through text-lg">
                   {formatPrice(Number(product.price))}
                 </span>
-                <Badge variant="destructive">-{discount}%</Badge>
+                <span className="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">-{discount}%</span>
               </div>
             )}
-            <span className="text-3xl font-bold text-amber-700">
+            <span className="text-3xl font-bold text-tobacco-700">
               {formatPrice(currentPrice)}
             </span>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-tobacco-500 mt-1">
               até 12x de {formatPrice(currentPrice / 12)} sem juros
             </p>
           </div>
 
           {/* Short Description */}
           {product.shortDescription && (
-            <p className="text-gray-600 mb-6">{product.shortDescription}</p>
+            <p className="text-tobacco-600 mb-6">{product.shortDescription}</p>
           )}
 
           {/* Variants */}
           {product.variants.length > 0 && (
             <div className="mb-6">
-              <p className="text-sm font-medium text-stone-700 mb-2">Variações:</p>
+              <p className="text-sm font-medium text-tobacco-700 mb-2">Variações:</p>
               <div className="flex flex-wrap gap-2">
                 {product.variants.map((variant) => (
                   <button
                     key={variant.id}
-                    className="px-3 py-1.5 border rounded-md text-sm hover:border-amber-700 hover:text-amber-700 transition-colors"
+                    className="px-3 py-1.5 border border-tobacco-200 rounded-lg text-sm hover:border-tobacco-600 hover:text-tobacco-700 transition-colors"
                   >
                     {variant.name}: {variant.value}
                   </button>
@@ -187,28 +187,27 @@ export default async function ProductPage({ params }: Props) {
       </div>
 
       {/* Tabs: Description, Specs, Reviews */}
-      <div className="bg-white rounded-lg border p-6 mb-12">
-        <div className="border-b mb-6">
+      <div className="bg-white rounded-xl border border-tobacco-200 p-6 mb-12 shadow-sm">
+        <div className="border-b border-tobacco-200 mb-6">
           <div className="flex gap-8">
-            <button className="pb-3 border-b-2 border-amber-700 text-amber-700 font-medium text-sm">
+            <button className="pb-3 border-b-2 border-tobacco-700 text-tobacco-700 font-medium text-sm">
               Descrição
             </button>
           </div>
         </div>
         {product.description ? (
-          <div
-            className="prose prose-stone max-w-none"
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          />
+          <div className="text-tobacco-700 leading-relaxed whitespace-pre-line">
+            {product.description}
+          </div>
         ) : (
-          <p className="text-gray-500">Sem descrição disponível.</p>
+          <p className="text-tobacco-400">Sem descrição disponível.</p>
         )}
       </div>
 
       {/* Reviews */}
       {product.reviews.length > 0 && (
-        <div className="bg-white rounded-lg border p-6 mb-12">
-          <h2 className="text-xl font-bold text-stone-900 mb-6">
+        <div className="bg-white rounded-xl border border-tobacco-200 p-6 mb-12 shadow-sm">
+          <h2 className="text-xl font-bold text-tobacco-900 mb-6">
             Avaliações ({product.reviews.length})
           </h2>
           <div className="space-y-4">
@@ -226,7 +225,7 @@ export default async function ProductPage({ params }: Props) {
                   <span className="text-sm font-medium">{review.user.name}</span>
                 </div>
                 {review.title && <p className="font-medium text-sm">{review.title}</p>}
-                {review.comment && <p className="text-sm text-gray-600 mt-1">{review.comment}</p>}
+                {review.comment && <p className="text-sm text-tobacco-600 mt-1">{review.comment}</p>}
               </div>
             ))}
           </div>
@@ -236,7 +235,7 @@ export default async function ProductPage({ params }: Props) {
       {/* Related Products */}
       {relatedProducts.length > 0 && (
         <section>
-          <h2 className="text-xl font-bold text-stone-900 mb-6">Produtos Relacionados</h2>
+          <h2 className="text-xl font-bold text-tobacco-900 mb-6">Produtos Relacionados</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {relatedProducts.map((p) => (
               <ProductCard

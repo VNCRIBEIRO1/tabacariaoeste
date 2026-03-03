@@ -13,7 +13,6 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const contactInfo = [
   {
@@ -68,10 +67,10 @@ export default function ContatoPage() {
     <div className="container mx-auto px-4 py-12">
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-tobacco-900 mb-4">
           Fale Conosco
         </h1>
-        <p className="text-stone-600">
+        <p className="text-tobacco-600">
           Tem alguma dúvida, sugestão ou precisa de ajuda? Entre em contato
           conosco. Ficaremos felizes em atender você!
         </p>
@@ -83,13 +82,13 @@ export default function ContatoPage() {
           {contactInfo.map((info) => {
             const Icon = info.icon
             return (
-              <Card key={info.label}>
-                <CardContent className="pt-6 flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-full bg-amber-50 flex items-center justify-center shrink-0">
-                    <Icon className="h-5 w-5 text-amber-700" />
+              <div key={info.label} className="bg-white rounded-xl border border-tobacco-200 p-6">
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 rounded-full bg-tobacco-50 flex items-center justify-center shrink-0">
+                    <Icon className="h-5 w-5 text-tobacco-700" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-stone-900">
+                    <p className="text-sm font-medium text-tobacco-900">
                       {info.label}
                     </p>
                     {info.href ? (
@@ -97,16 +96,16 @@ export default function ContatoPage() {
                         href={info.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-amber-700 hover:text-amber-800"
+                        className="text-sm text-tobacco-600 hover:text-tobacco-800"
                       >
                         {info.value}
                       </a>
                     ) : (
-                      <p className="text-sm text-stone-500">{info.value}</p>
+                      <p className="text-sm text-tobacco-500">{info.value}</p>
                     )}
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             )
           })}
 
@@ -123,18 +122,18 @@ export default function ContatoPage() {
         </div>
 
         {/* Form */}
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>Envie uma Mensagem</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div className="lg:col-span-2 bg-white rounded-xl border border-tobacco-200 overflow-hidden">
+          <div className="px-6 pt-6 pb-2">
+            <h2 className="text-lg font-semibold text-tobacco-900">Envie uma Mensagem</h2>
+          </div>
+          <div className="px-6 pb-6">
             {sent ? (
               <div className="text-center py-12">
                 <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-stone-900 mb-2">
+                <h3 className="text-lg font-semibold text-tobacco-900 mb-2">
                   Mensagem Enviada!
                 </h3>
-                <p className="text-stone-500 mb-4">
+                <p className="text-tobacco-500 mb-4">
                   Recebemos sua mensagem e retornaremos em breve.
                 </p>
                 <Button variant="outline" onClick={() => setSent(false)}>
@@ -145,7 +144,7 @@ export default function ContatoPage() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-stone-700">
+                    <label className="text-sm font-medium text-tobacco-700">
                       Nome
                     </label>
                     <Input
@@ -157,7 +156,7 @@ export default function ContatoPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-stone-700">
+                    <label className="text-sm font-medium text-tobacco-700">
                       Email
                     </label>
                     <Input
@@ -172,7 +171,7 @@ export default function ContatoPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-stone-700">
+                  <label className="text-sm font-medium text-tobacco-700">
                     Assunto
                   </label>
                   <Input
@@ -185,7 +184,7 @@ export default function ContatoPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-stone-700">
+                  <label className="text-sm font-medium text-tobacco-700">
                     Mensagem
                   </label>
                   <textarea
@@ -195,7 +194,7 @@ export default function ContatoPage() {
                     required
                     disabled={loading}
                     rows={5}
-                    className="flex w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
+                    className="flex w-full rounded-md border border-tobacco-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-tobacco-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tobacco-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
                   />
                 </div>
 
@@ -209,19 +208,19 @@ export default function ContatoPage() {
                 </Button>
               </form>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Map */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <MapPin className="h-5 w-5 text-amber-700" />
+      <div className="bg-white rounded-xl border border-tobacco-200 overflow-hidden">
+        <div className="px-6 pt-6 pb-2">
+          <h2 className="text-lg font-semibold text-tobacco-900 flex items-center gap-2">
+            <MapPin className="h-5 w-5 text-tobacco-700" />
             Nossa Localização
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
+          </h2>
+        </div>
+        <div className="px-6 pb-6">
           <div className="rounded-lg overflow-hidden">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3693.7!2d-51.389!3d-22.121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDA3JzE1LjYiUyA1McKwMjMnMjAuNCJX!5e0!3m2!1spt-BR!2sbr!4v1"
@@ -235,8 +234,8 @@ export default function ContatoPage() {
               className="w-full"
             />
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
