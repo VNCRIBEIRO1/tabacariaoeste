@@ -1,9 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Send, CheckCircle } from "lucide-react"
+import { Send, CheckCircle, Loader2 } from "lucide-react"
 
 export function NewsletterForm() {
   const [email, setEmail] = useState("")
@@ -24,7 +22,7 @@ export function NewsletterForm() {
 
       if (res.ok) {
         setStatus("success")
-        setMessage("Cadastrado com sucesso!")
+        setMessage("Cadastrado com sucesso! 🎉")
         setEmail("")
       } else {
         const data = await res.json()
@@ -39,33 +37,41 @@ export function NewsletterForm() {
 
   if (status === "success") {
     return (
-      <div className="flex items-center justify-center gap-2 text-green-400">
+      <div className="flex items-center justify-center gap-2 text-green-400 animate-fade-in">
         <CheckCircle className="h-5 w-5" />
-        <span>{message}</span>
+        <span className="font-medium">{message}</span>
       </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 max-w-md mx-auto">
-      <Input
-        type="email"
-        placeholder="Seu melhor e-mail"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="bg-stone-800 border-stone-700 text-white placeholder:text-gray-500"
-        required
-      />
-      <Button
-        type="submit"
-        disabled={status === "loading"}
-        className="flex-shrink-0"
-      >
-        <Send className="h-4 w-4 mr-2" />
-        {status === "loading" ? "..." : "Cadastrar"}
-      </Button>
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+      <div className="flex gap-2">
+        <div className="relative flex-1">
+          <input
+            type="email"
+            placeholder="Seu melhor e-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full rounded-full bg-tobacco-800 border border-tobacco-700 text-white px-5 py-3 text-sm placeholder:text-tobacco-400 focus:outline-none focus:ring-2 focus:ring-tobacco-500/50 focus:border-tobacco-500 transition-all"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="flex-shrink-0 inline-flex items-center gap-2 bg-tobacco-500 text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-tobacco-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        >
+          {status === "loading" ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Send className="h-4 w-4" />
+          )}
+          {status === "loading" ? "Enviando..." : "Cadastrar"}
+        </button>
+      </div>
       {status === "error" && (
-        <p className="text-red-400 text-sm mt-2">{message}</p>
+        <p className="text-red-400 text-sm mt-3 text-center">{message}</p>
       )}
     </form>
   )

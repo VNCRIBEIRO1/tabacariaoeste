@@ -140,16 +140,16 @@ export async function createPixPayment(
   }
 }
 
-// Map MercadoPago status to internal order status
+// Map MercadoPago status to internal order status (OrderStatus enum)
 export function mapPaymentStatus(mpStatus: string): string {
   const statusMap: Record<string, string> = {
-    approved: "CONFIRMED",
+    approved: "PAID",
     pending: "AWAITING_PAYMENT",
     in_process: "AWAITING_PAYMENT",
     rejected: "CANCELLED",
-    refunded: "CANCELLED",
+    refunded: "REFUNDED",
     cancelled: "CANCELLED",
-    charged_back: "CANCELLED",
+    charged_back: "REFUNDED",
   }
   return statusMap[mpStatus] || "AWAITING_PAYMENT"
 }

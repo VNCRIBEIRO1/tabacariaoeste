@@ -2,18 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { prisma } from "@/lib/prisma"
 import { ProductCard } from "@/components/store/product-card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import {
-  ArrowRight,
-  Truck,
-  Shield,
-  CreditCard,
-  Star,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react"
+import { ArrowRight, Flame, Sparkles, Gift, TrendingUp } from "lucide-react"
 import { HeroBanner } from "@/components/store/hero-banner"
 import { NewsletterForm } from "@/components/store/newsletter-form"
 
@@ -86,72 +75,46 @@ export default async function HomePage() {
       {/* Hero Banner */}
       <HeroBanner banners={banners} />
 
-      {/* Benefits Bar */}
-      <section className="bg-stone-900 text-white py-4">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="flex items-center gap-3 justify-center">
-              <Truck className="h-6 w-6 text-amber-500" />
-              <div>
-                <p className="text-sm font-semibold">Frete Grátis</p>
-                <p className="text-xs text-gray-400">Acima de R$ 299</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 justify-center">
-              <Shield className="h-6 w-6 text-amber-500" />
-              <div>
-                <p className="text-sm font-semibold">Compra Segura</p>
-                <p className="text-xs text-gray-400">100% protegida</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 justify-center">
-              <CreditCard className="h-6 w-6 text-amber-500" />
-              <div>
-                <p className="text-sm font-semibold">Até 12x</p>
-                <p className="text-xs text-gray-400">Sem juros no cartão</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 justify-center">
-              <Star className="h-6 w-6 text-amber-500" />
-              <div>
-                <p className="text-sm font-semibold">Qualidade</p>
-                <p className="text-xs text-gray-400">Produtos selecionados</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Categories */}
-      <section className="py-12 bg-white">
+      <section className="py-14 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-stone-900">
+          <div className="text-center mb-10">
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-tobacco-500 uppercase tracking-widest mb-2">
+              <Sparkles className="h-3.5 w-3.5" />
+              Explore
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-tobacco-900">
               Nossas Categorias
             </h2>
-            <p className="text-gray-600 mt-2">
-              Explore nossa seleção de produtos premium
+            <p className="text-tobacco-500 mt-2 max-w-md mx-auto">
+              Produtos selecionados com a qualidade que você merece
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-5">
             {categories.map((cat) => (
               <Link
                 key={cat.id}
                 href={`/categoria/${cat.slug}`}
-                className="group relative overflow-hidden rounded-xl bg-stone-100 aspect-square flex items-center justify-center hover:shadow-lg transition-all"
+                className="group relative overflow-hidden rounded-2xl bg-tobacco-100 aspect-square flex items-center justify-center hover:shadow-xl hover:shadow-tobacco-200/40 transition-all duration-300"
               >
                 {cat.image && (
                   <Image
                     src={cat.image}
                     alt={cat.name}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                <div className="relative z-10 text-center">
-                  {cat.icon && <span className="text-4xl mb-2 block">{cat.icon}</span>}
-                  <h3 className="text-white font-bold text-lg">{cat.name}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-tobacco-950/80 via-tobacco-900/20 to-transparent" />
+                <div className="relative z-10 text-center p-4">
+                  {cat.icon && (
+                    <span className="text-4xl mb-3 block drop-shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      {cat.icon}
+                    </span>
+                  )}
+                  <h3 className="text-white font-bold text-base md:text-lg drop-shadow-lg">
+                    {cat.name}
+                  </h3>
                 </div>
               </Link>
             ))}
@@ -161,20 +124,24 @@ export default async function HomePage() {
 
       {/* Featured Products */}
       {featuredProducts.length > 0 && (
-        <section className="py-12">
+        <section className="py-14 bg-tobacco-50/50">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-stone-900">
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-tobacco-500 uppercase tracking-widest mb-1">
+                  <TrendingUp className="h-3.5 w-3.5" />
+                  Mais Vendidos
+                </span>
+                <h2 className="text-2xl md:text-3xl font-bold text-tobacco-900">
                   Destaques
                 </h2>
-                <p className="text-gray-600 mt-1">Os mais procurados</p>
               </div>
               <Link
                 href="/busca?featured=true"
-                className="text-amber-700 hover:text-amber-800 text-sm font-medium flex items-center gap-1"
+                className="text-tobacco-600 hover:text-tobacco-800 text-sm font-semibold flex items-center gap-1 group"
               >
-                Ver Todos <ArrowRight className="h-4 w-4" />
+                Ver Todos
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -194,21 +161,37 @@ export default async function HomePage() {
       )}
 
       {/* Promo Banner */}
-      <section className="py-8">
+      <section className="py-10">
         <div className="container mx-auto px-4">
-          <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-amber-800 to-stone-900 text-white py-16 px-8 md:px-16">
+          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-tobacco-800 via-tobacco-900 to-tobacco-950 text-white py-16 px-8 md:px-16">
+            {/* Decorative elements */}
+            <div
+              className="absolute inset-0 opacity-20"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle at 70% 30%, rgba(212,127,37,0.4), transparent 50%)",
+              }}
+            />
             <div className="relative z-10 max-w-lg">
-              <Badge className="bg-amber-500 text-white mb-4">Oferta Especial</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="inline-flex items-center gap-1.5 bg-tobacco-600/40 border border-tobacco-500/30 rounded-full px-4 py-1.5 text-xs font-semibold text-amber-300 mb-5">
+                <Gift className="h-3.5 w-3.5" />
+                Oferta Especial
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
                 Frete Grátis em Compras Acima de R$ 299
               </h2>
-              <p className="text-amber-100 mb-6">
-                Aproveite condições especiais e receba seus produtos favoritos no conforto da sua casa.
+              <p className="text-tobacco-200 mb-8 leading-relaxed">
+                Aproveite condições especiais e receba seus produtos favoritos
+                no conforto da sua casa. Use o cupom{" "}
+                <span className="font-bold text-amber-300">BEMVINDO10</span>{" "}
+                para 10% de desconto na primeira compra.
               </p>
-              <Link href="/categoria/charutos">
-                <Button className="bg-white text-stone-900 hover:bg-gray-100">
-                  Aproveitar Oferta
-                </Button>
+              <Link
+                href="/categoria/charutos"
+                className="inline-flex items-center gap-2 bg-tobacco-500 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-tobacco-400 transition-all shadow-lg hover:shadow-xl"
+              >
+                Aproveitar Oferta
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -217,20 +200,24 @@ export default async function HomePage() {
 
       {/* Promo Products */}
       {promoProducts.length > 0 && (
-        <section className="py-12 bg-white">
+        <section className="py-14 bg-white">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-stone-900">
-                  🔥 Promoções
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-red-500 uppercase tracking-widest mb-1">
+                  <Flame className="h-3.5 w-3.5" />
+                  Preços Imperdíveis
+                </span>
+                <h2 className="text-2xl md:text-3xl font-bold text-tobacco-900">
+                  Promoções
                 </h2>
-                <p className="text-gray-600 mt-1">Preços imperdíveis</p>
               </div>
               <Link
                 href="/busca?promo=true"
-                className="text-amber-700 hover:text-amber-800 text-sm font-medium flex items-center gap-1"
+                className="text-tobacco-600 hover:text-tobacco-800 text-sm font-semibold flex items-center gap-1 group"
               >
-                Ver Todos <ArrowRight className="h-4 w-4" />
+                Ver Todos
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -251,20 +238,24 @@ export default async function HomePage() {
 
       {/* Recent Products */}
       {recentProducts.length > 0 && (
-        <section className="py-12">
+        <section className="py-14 bg-tobacco-50/50">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-stone-900">
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-tobacco-500 uppercase tracking-widest mb-1">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Recém Chegados
+                </span>
+                <h2 className="text-2xl md:text-3xl font-bold text-tobacco-900">
                   Novidades
                 </h2>
-                <p className="text-gray-600 mt-1">Recém chegados</p>
               </div>
               <Link
                 href="/busca?sort=newest"
-                className="text-amber-700 hover:text-amber-800 text-sm font-medium flex items-center gap-1"
+                className="text-tobacco-600 hover:text-tobacco-800 text-sm font-semibold flex items-center gap-1 group"
               >
-                Ver Todos <ArrowRight className="h-4 w-4" />
+                Ver Todos
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -284,12 +275,15 @@ export default async function HomePage() {
       )}
 
       {/* Newsletter */}
-      <section className="py-16 bg-stone-900 text-white">
+      <section className="py-16 bg-tobacco-900">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-tobacco-400 uppercase tracking-widest mb-3">
+            Fique por dentro
+          </span>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
             Receba Ofertas Exclusivas
           </h2>
-          <p className="text-gray-400 mb-6 max-w-md mx-auto">
+          <p className="text-tobacco-400 mb-8 max-w-md mx-auto">
             Cadastre-se e receba promoções, lançamentos e novidades diretamente no seu e-mail.
           </p>
           <NewsletterForm />
